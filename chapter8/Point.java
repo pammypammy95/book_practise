@@ -3,7 +3,7 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
- public class Point{  
+ public class Point implements Comparable<Point>{  
  
 	private int x;     
 	private int y;   
@@ -128,6 +128,19 @@ import java.math.RoundingMode;
 		return (double) (y - other.y) / (double) (x - other.x);
 		
 	}
+	
+	// compareTo method
+	public int compareTo(Point other){
+		
+ 		if(y == other.y){
+			
+    			return x - other.x;
+			
+  		}
+		
+  		return y - other.y;
+	}
+
 	 
 	// determine 3 points are line up together
 	public boolean isCollinear(Point p1, Point p2){
