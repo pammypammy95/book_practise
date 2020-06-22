@@ -1,58 +1,55 @@
-//Represents a time span of elapsed hours and minutes. 
-// Second implementation using a single field for total minutes. 
-// Class invariant: totalMinutes >= 0 
- 
-public class TimeSpan2{ 
+// Represents a time span of hours and minutes elapsed.
+// Class invariant: hours >= 0 && minutes >= 0 && minutes < 60
+public class TimeSpan implements Comparable<TimeSpan>{
+	
+	private int hours;
+	private int minutes;
 
-	private int totalMinutes; 
- 
-    // Constructs a time span with the given interval. 
-    // pre: hours >= 0 && minutes >= 0 
-    public TimeSpan(int hours, int minutes){ 
-       
-	totalMinutes = 0; 
-        add(hours, minutes); 
+	// Constructs a time span with the given interval.
+	// pre: hours >= 0 && minutes >= 0
+	public TimeSpan(int hours, int minutes){
+	
+		this.hours = 0;
+		this.minutes = 0;
+		add(hours, minutes);
+	
+	}
+
+	// Adds the given interval to this time span.
+	// pre: hours >= 0 && minutes >= 0
+	public void add(int hours, int minutes){
+	
+		if(hours < 0 || minutes < 0){
+	
+			throw new IllegalArgumentException();
+	
+		}
+
+		this.hours += hours;
+		this.minutes += minutes;
+
+		// converts each 60 minutes into one hour
+		this.hours += this.minutes / 60;
+		this.minutes = this.minutes % 60;
 		
-    } 
- 
-    // Adds the given interval to this time span. 
-    // pre: hours >= 0 && minutes >= 0 
-    public void add(int hours, int minutes){ 
-        
-	if (hours < 0 || minutes < 0){ 
+	}
+
+	// returns a String for this time span, such as "6h 15m"
+	public String toString(){
 		
-            throw new IllegalArgumentException(); 
+		return hours + "h " + minutes + "m";
+		
+	}
+	
+	// class must implement Comparable interface of TimeSpan type
+	public int compareTo(TimeSpan other){
+		
+		if(hours == other.hours){
 			
-        } 
+			return minutes - other.minutes;
+		}
 		
-        totalMinutes += 60 * hours + minutes; 
-    } 
- 
-    // returns a String for this time span, such as "6h 15m" 
-    public String toString(){ 
-	
-        return (totalMinutes / 60) + "h " + (totalMinutes % 60) + "m"; 
-		
-    } 
-	
-	// add timespan to method with object parameter
-	public void add(Timespan span){
-		
-		totalMinutes += span.totalMinutes;
-		
-	}
-	
-	// subtract timespan 
-	public void subtract(Timespan span){
-		
-		totalMinutes -= span.totalMinutes;
-		
-	}
-
-	// time x factor
-	public void scale(int factor){
-		
-		totalMinutes *= factor;
+		return hours - other.hours;
 		
 	}
 
