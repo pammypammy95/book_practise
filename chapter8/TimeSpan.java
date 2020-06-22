@@ -2,7 +2,7 @@
 // Second implementation using a single field for total minutes. 
 // Class invariant: totalMinutes >= 0 
  
-public class TimeSpan { 
+public class TimeSpan2{ 
 
 	private int totalMinutes; 
  
@@ -10,7 +10,7 @@ public class TimeSpan {
     // pre: hours >= 0 && minutes >= 0 
     public TimeSpan(int hours, int minutes){ 
        
-		totalMinutes = 0; 
+	totalMinutes = 0; 
         add(hours, minutes); 
 		
     } 
@@ -19,7 +19,7 @@ public class TimeSpan {
     // pre: hours >= 0 && minutes >= 0 
     public void add(int hours, int minutes){ 
         
-		if (hours < 0 || minutes < 0){ 
+	if (hours < 0 || minutes < 0){ 
 		
             throw new IllegalArgumentException(); 
 			
