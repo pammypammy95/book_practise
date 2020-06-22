@@ -2,7 +2,7 @@
 // Second implementation using a single field for total minutes. 
 // Class invariant: totalMinutes >= 0 
  
-public class TimeSpan { 
+public class TimeSpan2 { 
 
 	private int totalMinutes; 
  
